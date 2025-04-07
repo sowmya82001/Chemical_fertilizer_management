@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fertilizer List</title>
+</head>
+<body>
+    <h1>Fertilizer Inventory</h1>
+    <a href="{% url 'add_fertilizer' %}">Add Fertilizer</a>
+    <ul>
+        {% for fertilizer in fertilizers %}
+            <li>{{ fertilizer.name }} - {{ fertilizer.quantity }} units - ${{ fertilizer.price }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

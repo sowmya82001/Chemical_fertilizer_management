@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order Fertilizer</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: url('https://i.pinimg.com/736x/e7/61/3d/e7613d4ff318f0a3072e9a4075e50168.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+        }
+        .order-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Chemical Fertilizer Management System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register_farmer' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'recommend_fertilizer' %}">Recommendations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'order_fertilizer' %}">Order Fertilizer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Order Fertilizer Form Section -->
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="col-md-6 order-container">
+            <h2 class="text-center text-success fw-bold">Order Fertilizer</h2>
+            <form method="post" class="mt-4">
+                {% csrf_token %}
+
+                <!-- Fertilizer Selection -->
+                <div class="mb-3">
+                    <label for="fertilizer_name" class="form-label">Select Fertilizer</label>
+                    <select class="form-select" name="fertilizer_name" id="fertilizer_name" required>
+                        <option value="" disabled selected>Select Fertilizer</option>
+                        <option value="Urea">Urea</option>
+                        <option value="DAP">DAP</option>
+                        <option value="Potash">Potash</option>
+                        <option value="NPK">NPK</option>
+                    </select>
+                </div>
+
+                <!-- Quantity -->
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Quantity (kg)</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+                </div>
+
+                <!-- Delivery Address -->
+                <div class="mb-3">
+                    <label for="address" class="form-label">Delivery Address</label>
+                    <textarea class="form-control" id="address" name="address" rows="3" placeholder="Enter your full address" required></textarea>
+                </div>
+
+                <!-- Delivery Date -->
+                <div class="mb-3">
+                    <label for="delivery_date" class="form-label">Preferred Delivery Date</label>
+                    <input type="date" class="form-control" id="delivery_date" name="delivery_date" required>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="mb-3">
+                    <label for="payment_method" class="form-label">Payment Method</label>
+                    <select class="form-select" name="payment_method" id="payment_method" required>
+                        <option value="" disabled selected>Select Payment Method</option>
+                        <option value="Cash on Delivery">Cash on Delivery</option>
+                        <option value="Online Payment">Online Payment</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+               
+                <button type="submit" class="btn btn-success w-100">Place Order</button>
+            </form>
+
+            <!-- Error Message -->
+            {% if error %}
+                <p class="text-danger text-center mt-3">{{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-success text-white text-center py-3 mt-4">
+        <p class="mb-0">© 2024 Chemical Fertilizer Management System. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

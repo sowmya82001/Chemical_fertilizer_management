@@ -1,0 +1,9 @@
+{% extends 'fertilizer_app/base.html' %}
+{% block content %}
+<h2>Fertilizers Available</h2>
+<ul>
+    {% for fertilizer in fertilizers %}
+    <li>{{ fertilizer.name }} - {{ fertilizer.stock }} in stock</li>
+    {% endfor %}
+</ul>
+{% endblock %}
